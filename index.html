@@ -11,17 +11,24 @@
 </head>
 <body>
   <div class="container">
+    <div class="app-wrapper">
     <div class="weather-app">
+    <div class="time-place">
                    <h1>Pretoria</h1>
                    <ul>
                     <li>Friday 16:00</li>
                     <li>clear-sky</li>
                    </ul>
+                   </div>
 
                    <div class="row">
                     <div class="col-6">
-                        <img src="https://assets.msn.com/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/MostlySunnyDay.svg" alt="sunny">
-                   12 °C | °F
+                        <div class="d-flex weather-temp">
+                        <img src="https://assets.msn.com/weathermapdata/1/static/weather/Icons/taskbar_v10/Condition_Card/MostlySunnyDay.svg" alt="sunny" class="float-left">
+                  <div>
+                     <strong>12</strong><span>°C | °F</span>
+                  </div>
+                    </div>
                     </div>
 
                    <div class="col-6">
@@ -31,11 +38,13 @@
                         <li>Wind: 4km/h</li>
                     </ul>
                    </div>
-                    </div>
-                    <small><a href="https://github.com/cyberwithkeke/Dawn-Weather-App" target="_blank" rel="noopener noreferrer">open-sourced on GitHub</a> by Kekeletso Moloi</small>
                    </div>
                    </div>
-                    
+                   <small><a href="https://github.com/cyberwithkeke/Dawn-Weather-App" target="_blank"
+                        rel="noopener noreferrer">open-sourced on GitHub</a> by Kekeletso Moloi</small>
+                   </div>
+                   </div>
+                    </body>
                 
     <script src="src/script.js"></script>
 </body>
