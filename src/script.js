@@ -55,14 +55,17 @@ function displayTemp(response){
     let dateElement = document.querySelector("#date");
     dateElement.innerHTML =formatDate(response.data.dt * 1000);
 
+    //adding real time icon of weather description
+    let iconElement = document.querySelector("#icon");
+    iconElement.setAttribute ("src",`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`); 
 
-};
-
-
+    //changing alt to real time description of the icon in js
+    iconElement.setAttribute ("alt", response.data.weather[0].description);
+}
 
 
 
 let apiKey = "661209a470ee91ce662726bf1f4724cc";
-let cityName = "Durban";
+let cityName = "Cape Town";
 let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
 axios.get(apiUrl).then(displayTemp);
