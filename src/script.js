@@ -1,5 +1,5 @@
 //calculating date using timestap in the function
-function formatDate(timestap){
+    function formatDate(timestap){
     let date = new Date(timestap);
 
     //adding zero in hours from 5:45 - 05:45
@@ -64,8 +64,26 @@ function displayTemp(response){
 }
 
 
-
+//a fucntion that display the realtime searched city on web app
+function search (cityName){
 let apiKey = "661209a470ee91ce662726bf1f4724cc";
-let cityName = "Cape Town";
 let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
 axios.get(apiUrl).then(displayTemp);
+}
+
+
+//a function that will prevent automated pop up.
+function handleSearch(event){
+event.preventDefault();
+let cityInputElement = document.querySelector("#city-input");
+search(cityInputElement.value); // the city searched can appear on the page when searched on the page
+console.log(cityInputElement.value);
+}
+
+
+//linking the form to javas
+let form = document.querySelector("#search-form");
+form.addEventListener("submit",handleSearch);
+
+
+search("Pretoria");
