@@ -36,8 +36,10 @@ function displayTemp(response){
     console.log(response.data.name);
     console.log(response.data.weather[0].description);
 
+
+    celsiusTemperature = response.data.main.temp;
     let temperatureElement = document.querySelector("#temp");
-    temperatureElement.innerHTML= Math.round(response.data.main.temp);
+    temperatureElement.innerHTML= Math.round(celsiusTemperature);
     let temp = `${temperatureElement}`;
 
     let cityElement = document.querySelector("#cityName")
@@ -61,6 +63,7 @@ function displayTemp(response){
 
     //changing alt to real time description of the icon in js
     iconElement.setAttribute ("alt", response.data.weather[0].description);
+
 }
 
 
@@ -81,9 +84,42 @@ console.log(cityInputElement.value);
 }
 
 
+//a function for fahrenheit convertion
+function displayFahTemperature(event){
+    event.preventDefault();
+    fahLink.classList.add("active");
+    //remove the active class of celsius link to fah when clicked
+    celsiusLink.classList.remove("active");
+    let fahTemperature = (celsiusTemperature * 9) / 5 + 32;
+    let temperatureElement = document.querySelector("#temp");
+    temperatureElement.innerHTML = Math.round(fahTemperature);
+    
+}
+
+// a function for celsius convertion
+function displayCelsiusTemperature(event){
+    event.preventDefault();
+    fahLink.classList.remove("active");
+    celsiusLink.classList.add("active");
+    let temperatureElement = document.querySelector("#temp");
+    temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+
+let celsiusTemperature = null;
+
+
 //linking the form to javas
 let form = document.querySelector("#search-form");
 form.addEventListener("submit",handleSearch);
 
+
+//converting celsius into fahrenheit °C -°F
+let fahLink = document.querySelector("#fah-link");
+fahLink.addEventListener("click", displayFahTemperature);
+
+//converting fahrenheit back to celsius °F -°C
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 search("Pretoria");
