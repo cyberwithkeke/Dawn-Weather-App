@@ -66,6 +66,20 @@ li:first-letter{
     top: -30px;
 }
 
+.weather-temp .activated {
+    text-decoration: none;
+}
+
+.weather-temp .active {
+    color: rgb(29, 28, 28);
+    cursor: default;
+    text-decoration: none;
+}
+
+.weather-temp .active , .activated:hover{
+    text-decoration: none;
+}
+
 
 .description{
     text-transform: capitalize;
