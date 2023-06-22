@@ -44,7 +44,7 @@ li:first-letter{
 }
 
 .time-place{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .weather-temp img{
@@ -87,8 +87,6 @@ li:first-letter{
 
 
 .weather-forecast {
-    border: 1px solid pink;
-    border-radius: 25px 10px;
     margin-top: 20px;
     text-align: center;
     color: black;
