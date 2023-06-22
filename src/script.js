@@ -64,15 +64,32 @@ function displayTemp(response){
     //changing alt to real time description of the icon in js
     iconElement.setAttribute ("alt", response.data.weather[0].description);
 
+    //used on getForecast function
+    getForecast(response.data.coord);
 }
 
+
+//A function that calls API and display real time days of the week weather forecast.
+function getForecast(coords){
+  console.log(coords);
+
+  let apiKey = "197ef3a642b76eef90e131866f74a0a0";
+  let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeatherForecast);
+}
+
+
 //A function to multiple days of the week of forecast from 1 day HTML using Javas
-function displayWeatherForecast(){
+function displayWeatherForecast(response) {
+  console.log(response.data.daily);
+
   let forecastElement = document.querySelector("#weather-forecast");
+
   //injecting html code
-  let forecastHTML = `<div class="row">`;
   let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
-  days.forEach(function(day){
+
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function(day) {
   forecastHTML = forecastHTML +
                       `
                         <div class="col-2">
@@ -96,9 +113,10 @@ function displayWeatherForecast(){
  
 }
 
+
 //a fucntion that display the realtime searched city on web app
 function search (cityName){
-let apiKey = "661209a470ee91ce662726bf1f4724cc";
+let apiKey = "197ef3a642b76eef90e131866f74a0a0";
 let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
 axios.get(apiUrl).then(displayTemp);
 }
@@ -124,6 +142,7 @@ function displayFahTemperature(event){
     temperatureElement.innerHTML = Math.round(fahTemperature);
     
 }
+
 
 // a function for celsius convertion
 function displayCelsiusTemperature(event){
@@ -152,5 +171,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 
-displayWeatherForecast();
 search("Pretoria");
