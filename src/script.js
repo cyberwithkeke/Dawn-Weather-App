@@ -66,6 +66,35 @@ function displayTemp(response){
 
 }
 
+//A function to multiple days of the week of forecast from 1 day HTML using Javas
+function displayWeatherForecast(){
+  let forecastElement = document.querySelector("#weather-forecast");
+  //injecting html code
+  let forecastHTML = `<div class="row">`;
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
+  days.forEach(function(day){
+  forecastHTML = forecastHTML +
+                      `
+                        <div class="col-2">
+                            <div class="forecast-date">
+                                ${day}
+                            </div>
+                        
+                            <img 
+                            src="https://openweathermap.org/img/wn/01d@2x.png" 
+                            alt="" 
+                            width="42" 
+                            /> 
+                            <div class="forecast-temp">
+                            <span class="max">22°</span> <span class="min">16°</span>
+                            </div>
+                          </div>
+                        `;
+                        });
+    forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+ 
+}
 
 //a fucntion that display the realtime searched city on web app
 function search (cityName){
@@ -122,4 +151,6 @@ fahLink.addEventListener("click", displayFahTemperature);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
+
+displayWeatherForecast();
 search("Pretoria");
