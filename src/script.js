@@ -79,34 +79,47 @@ function getForecast(coords){
 }
 
 
+//function to format numerical days from API to etc MON,TUE
+function formatDay(timestap){
+  let date = new Date(timestap * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed","Thu","Fri", "Sat"];
+
+  return days[day];
+};
+
 //A function to multiple days of the week of forecast from 1 day HTML using Javas
 function displayWeatherForecast(response) {
   console.log(response.data.daily);
-
+let weatherForecast = response.data.daily;
   let forecastElement = document.querySelector("#weather-forecast");
 
   //injecting html code
   let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
 
   let forecastHTML = `<div class="row">`;
-  days.forEach(function(day) {
+  weatherForecast.forEach(function(forecastDay, index) 
+                        {
+    if (index < 6) {
   forecastHTML = forecastHTML +
                       `
                         <div class="col-2">
                             <div class="forecast-date">
-                                ${day}
+                                ${formatDay(forecastDay.dt)}
                             </div>
                         
                             <img 
-                            src="https://openweathermap.org/img/wn/01d@2x.png" 
+                            src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" 
                             alt="" 
                             width="42" 
                             /> 
                             <div class="forecast-temp">
-                            <span class="max">22°</span> <span class="min">16°</span>
+                            <span class="max">${Math.round(forecastDay.temp.max)}°</span> <span class="min">${Math.round(forecastDay.temp.min)}°</span>
                             </div>
                           </div>
                         `;
+                      }
+                      
                         });
     forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
