@@ -32,40 +32,40 @@
 //display realtime temp,date and time on app and city
 function displayTemp(response){
     console.log(response.data);
-    console.log(response.data.main.temp);
-    console.log(response.data.name);
-    console.log(response.data.weather[0].description);
+    console.log(response.data.temperature.current);
+    console.log(response.data.city);
+    console.log(response.data.condition.description);
 
 
-    celsiusTemperature = response.data.main.temp;
+    celsiusTemperature = response.data.temperature.current;
     let temperatureElement = document.querySelector("#temp");
     temperatureElement.innerHTML= Math.round(celsiusTemperature);
     let temp = `${temperatureElement}`;
 
     let cityElement = document.querySelector("#cityName")
-    cityElement.innerHTML=(response.data.name);
+    cityElement.innerHTML=(response.data.city);
 
     let descriptionElement = document.querySelector("#description");
-    descriptionElement.innerHTML= (response.data.weather[0].description);
+    descriptionElement.innerHTML= (response.data.condition.description);
 
     let humidityElement = document.querySelector("#humidity");
-    humidityElement.innerHTML=(response.data.main.humidity);
+    humidityElement.innerHTML=(response.data.temperature.humidity);
 
     let windElement = document.querySelector("#wind");
     windElement.innerHTML=Math.round(response.data.wind.speed);
 
     let dateElement = document.querySelector("#date");
-    dateElement.innerHTML =formatDate(response.data.dt * 1000);
+    dateElement.innerHTML =formatDate(response.data.time * 1000);
 
     //adding real time icon of weather description
     let iconElement = document.querySelector("#icon");
-    iconElement.setAttribute ("src",`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`); 
+    iconElement.setAttribute ("src",`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`); 
 
     //changing alt to real time description of the icon in js
-    iconElement.setAttribute ("alt", response.data.weather[0].description);
+    iconElement.setAttribute ("alt", response.data.condition.description);
 
     //used on getForecast function
-    getForecast(response.data.coord);
+    getForecast(response.data.coordinates);
 }
 
 
@@ -73,8 +73,8 @@ function displayTemp(response){
 function getForecast(coords){
   console.log(coords);
 
-  let apiKey = "197ef3a642b76eef90e131866f74a0a0";
-  let apiUrl=`https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${apiKey}&units=metric`;
+  let apiKey = "20601501f5f30dff45eo3e04tfa40ddb";
+  let apiUrl =`https://api.shecodes.io/weather/v1/forecast?lat=${coords.latitude}&lon=${coords.longitude}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWeatherForecast);
 }
 
@@ -103,18 +103,18 @@ let weatherForecast = response.data.daily;
     if (index < 6) {
   forecastHTML = forecastHTML +
                       `
-                        <div class="col-2">
+                        <div class="col-2 forecastDay" >
                             <div class="forecast-date">
-                                ${formatDay(forecastDay.dt)}
+                                ${formatDay(forecastDay.time)}
                             </div>
                         
                             <img 
-                            src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" 
+                            src ="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${forecastDay.condition.icon}.png" 
                             alt="" 
                             width="42" 
                             /> 
                             <div class="forecast-temp">
-                            <span class="max">${Math.round(forecastDay.temp.max)}°</span> <span class="min">${Math.round(forecastDay.temp.min)}°</span>
+                            <span class="max">${Math.round(forecastDay.temperature.maximum)}°</span> <span class="min">${Math.round(forecastDay.temperature.minimum)}°</span>
                             </div>
                           </div>
                         `;
@@ -129,8 +129,8 @@ let weatherForecast = response.data.daily;
 
 //a fucntion that display the realtime searched city on web app
 function search (cityName){
-let apiKey = "197ef3a642b76eef90e131866f74a0a0";
-let apiUrl =`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+let apiKey = "20601501f5f30dff45eo3e04tfa40ddb";
+let apiUrl =`https://api.shecodes.io/weather/v1/current?query=${cityName}&key=${apiKey}&units=metric`;
 axios.get(apiUrl).then(displayTemp);
 }
 
@@ -184,4 +184,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 
-search("Cape Town");
+search("Pretoria");
