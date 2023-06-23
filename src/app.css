@@ -34,7 +34,7 @@ li:first-letter{
     max-width: 550px;
     margin: 10px auto;
     padding: 20px;
-    border: 1px solid #dadde2;
+    border: 3px solid rgb(248, 186, 248);
     border-radius: 6px;
 }
 
@@ -90,7 +90,8 @@ li:first-letter{
     margin-top: 20px;
     text-align: center;
     color: black;
-}
+    }
+
 
 .forecast-date{
     font-size: 16px;
@@ -105,5 +106,6 @@ li:first-letter{
 
 .weather-forecast .min{ 
     opacity:0.6;
-    color: rgb(235, 42, 74);
+    color: purple;
+
 }
