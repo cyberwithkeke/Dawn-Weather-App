@@ -34,8 +34,9 @@ li:first-letter{
     max-width: 550px;
     margin: 10px auto;
     padding: 20px;
-    border: 3px solid rgb(248, 186, 248);
+    border: 3px solid rgb(252, 4, 252);
     border-radius: 6px;
+    background: linear-gradient(109.6deg, rgb(255, 221, 225) 11.2%, rgb(255, 255, 255) 92.2%);
 }
 
 .app-wrapper{
@@ -90,6 +91,8 @@ li:first-letter{
     margin-top: 20px;
     text-align: center;
     color: black;
+    border: 2px solid rgb(252, 4, 252);
+    background: transparent;
     }
 
 
@@ -106,6 +109,11 @@ li:first-letter{
 
 .weather-forecast .min{ 
     opacity:0.6;
-    color: purple;
 
+}
+
+.btn{
+    background: rgb(252, 232, 235);
+    border: 2px solid rgb(252, 4, 252);
+    
 }
